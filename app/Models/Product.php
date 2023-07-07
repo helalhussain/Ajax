@@ -5,9 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model
+class Product extends Model
 {
     use HasFactory;
 
-    protected $fllable = ['name','dept','gender'];
+    public function categories()
+    {
+        return $this->belongsToMany(Category::class,);
+    }
 }

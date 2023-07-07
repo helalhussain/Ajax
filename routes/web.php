@@ -1,8 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StudentController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,7 +16,10 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-Route::get('/',[HomeController::class,'index']);
-Route::get('/student',[StudentController::class,'index']);
-Route::get('/student/create',[StudentController::class,'create']);
-Route::post('/student/create',[StudentController::class,'store'])->name('store');
+Route::get('/', [UserController::class,'fetch']);
+Route::post('/',[UserController::class,'add'])->name('add.user');
+Route::get('/edit/{id}',[UserController::class,'edit'])->name('edit.user');
+Route::get('/user',[UserController::class,'user'])->name('user');
+Route::get('/search',[ProductController::class,'sear'])->name('filter');
+
+Route::resource('student', StudentController::class);
