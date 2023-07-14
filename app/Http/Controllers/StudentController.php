@@ -10,10 +10,18 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $students = Student::all();
-        return view('student.index',compact('students'));
+        $query = Student::query();
+        if($request->ajax()){
+           $students = $query->where('name','LIKE','%'.$request->name.'%')->get();
+        // $sutends = Student::white('id',5)->get();
+            return response()->json(['students'=>$students]);
+        }else{
+            $students = $query->get();
+            return view('student.index',compact('students'));
+        }
+
     }
 
     /**
